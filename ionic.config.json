@@ -1,0 +1,15 @@
+{
+  "name": "MarketPlace-App",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "v2": true,
+  "typescript": true,
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://a9ad2e12aa0b94357821a5cb222b7bce-51371841.eu-west-3.elb.amazonaws.com:8080"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon  style="font-size: 200%;color: white" name="arrow-back-outline" class="white top-btn" (click)="close()">Close</ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="!search" (click)="search_(search,select.value)" style="color: #ff6990;background-color: rgba(255,66,142,0);margin-top: 10px;border-radius: 10px" type="submit" fill="clear">
+        enregistrer
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+<div  >
+  <ion-item   style="margin-left: 2%;margin-right: 2%">
+    <ion-label position="floating">chercher</ion-label>
+    <ion-input name="search"  #input (ionChange)="search=input.value" ></ion-input>
+  </ion-item>
+  <ion-item style="margin-left: 2%;margin-right: 2%">
+    <ion-label>options</ion-label>
+    <ion-select  #select value="1">
+      <ion-select-option  value="1"  text-center>Nom du client</ion-select-option>
+      <ion-select-option  value="2"   text-center>produit</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+</div>
+</ion-content>

@@ -1,0 +1,62 @@
+<ion-app>
+
+  <ion-menu  side="end">
+    <ion-content>
+      <ion-list *ngIf="loading" >
+        <ion-menu-toggle *ngIf="user.sailor" (click)="router.navigate(['sailor/profile'])">
+          <ion-item lines="none" >
+            <ion-icon name="person-outline" slot="start"></ion-icon>
+            <ion-label>Compte</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle *ngIf="!user.sailor&&user.id" (click)="router.navigate(['client/profile'])">
+          <ion-item lines="none" >
+            <ion-icon name="person-outline" slot="start"></ion-icon>
+            <ion-label>Compte</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle *ngIf="user.sailor" (click)="router.navigate(['sailor/orders'])">
+          <ion-item lines="none" >
+            <ion-icon name="podium" slot="start"></ion-icon>
+            <ion-label>Commande</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle *ngIf="!user.sailor&&user.id" (click)="router.navigate(['client/commandes'])">
+          <ion-item lines="none" >
+            <ion-icon name="podium" slot="start"></ion-icon>
+            <ion-label>Commande</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle *ngIf="!user.id" (click)="router.navigate(['/sign-in'])">
+          <ion-item lines="none" >
+            <ion-icon  name="log-in-outline" slot="start"></ion-icon>
+            <ion-label>connecter</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle *ngIf="user.sailor" (click)="router.navigate(['sailor'])">
+          <ion-item lines="none" >
+            <ion-icon name="phone-portrait-outline" slot="start"></ion-icon>
+            <ion-label>produits</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle *ngIf="user.sailor" (click)="router.navigate(['sailor/horaire'])">
+          <ion-item lines="none" >
+            <ion-icon slot="start" name="calendar-outline"></ion-icon>
+            <ion-label>Horaire</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle *ngIf="user.id"  (click)="logout()">
+          <ion-item  lines="none" >
+            <ion-icon  name="log-out-outline" slot="start"></ion-icon>
+            <ion-label>Se déconnecter</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+
+  <ion-router-outlet main></ion-router-outlet>
+</ion-app>

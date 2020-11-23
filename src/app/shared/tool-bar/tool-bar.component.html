@@ -1,0 +1,21 @@
+<ion-header  [translucent]="true">
+  <ion-toolbar >
+
+    <ion-title  (click)="route.navigateByUrl('')"  type="text"  padding-start  class="search-bar">Marketplace</ion-title>
+    <ion-buttons  slot="end">
+      <ion-button *ngIf="userconnected" id="notification-button" (click)="navigate_to_chart()" >
+        <ion-icon   name="cart" slot="icon-only" no-margin class="white top-btn"></ion-icon>
+
+        <ion-badge id="notifications-badge" color="danger">{{numberCartProduct>0?numberCartProduct:0}}</ion-badge>
+      </ion-button>
+      <ion-button *ngIf="userconnected"  (click)="navigate_to_boutique()" >
+<span style="color: white" class="material-icons">
+store
+</span>
+      </ion-button>
+
+        <ion-menu-button></ion-menu-button>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

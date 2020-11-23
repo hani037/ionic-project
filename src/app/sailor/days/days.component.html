@@ -1,0 +1,34 @@
+
+<div >
+
+  <ion-item (click)="clicked_()" lines="none">
+  <ion-label *ngIf="period.length>0">{{name}}</ion-label>
+  <ion-label style="color: rgba(83,83,83,0.79)" *ngIf="period.length==0" >{{name}}</ion-label>
+  <ion-toggle *ngIf="!client_view" (ionChange)="cancel_all(toggle.checked)" #toggle [checked]="period.length>0" slot="end" name="blueberry" ></ion-toggle>
+      <ion-icon style="color: #0ec254" *ngIf="client_view&&period.length>0" name="checkmark-outline"></ion-icon>
+      <ion-icon style="color:red" *ngIf="client_view&&period.length==0" name="close-outline"></ion-icon></ion-item>
+  <div *ngIf="clicked">
+      <div *ngIf="period.length>0">
+          <div *ngFor="let a of period;let i = index"    style="margin-left: 5%;margin-right: 5%">
+              <div style="display: flex" >
+                  <div  style="flex: 3">
+                      <ion-text>Du </ion-text>
+                      <ion-datetime #start (ionChange)="start_time(start.value,i)"  display-format="H:mm " picker-format="H:mm " [value]="a.start" ></ion-datetime>
+                  </div>
+                  <div  style="flex: 3">
+                      <ion-text>A</ion-text>
+                      <ion-datetime  #end (ionChange)="end_time(end.value,i)" display-format="H:mm" picker-format="H:mm" [value]="a.end" ></ion-datetime>
+                  </div>
+                  <div *ngIf="!client_view" style="flex: 1;display: flex">
+                      <ion-icon  (click)="add()" style="flex: 1;font-size: 200%"  slot="end" name="add-circle-outline"></ion-icon>
+                      <ion-icon  (click)="cancel(i)" style="flex:1;font-size: 200%"  slot="end" name="close-circle-outline"></ion-icon>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+
+  </div>
+<hr style="background-color: black">
+</div>
+

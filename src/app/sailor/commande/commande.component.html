@@ -1,0 +1,29 @@
+<ion-card  >
+    <div style="display: flex">
+
+        <div style="flex: 5"  >
+            <ion-card-header>
+                <h2 style="color: black">Commande {{nb+1}}</h2>
+            </ion-card-header>
+            <ion-card-content >
+
+
+                <h4  >Client:<strong>{{expedition.client.firstName}} {{ expedition.client.lastName}}</strong></h4>
+                <ion-text  >nombre des articles({{expedition.expeditionProducts.length}} article)</ion-text>
+                <h3 *ngIf="expedition.expeditionStatus=='WAIT_VALIDATION'" style="white-space: nowrap;color: #ff0032" >en attente de validation</h3>
+                <h3 *ngIf="expedition.expeditionStatus=='UNDER_PREPARATION'" style="white-space: nowrap;color:  #ff0032" >en cours de préparation</h3>
+                <h3 *ngIf="expedition.expeditionStatus=='READY_PICKUP'" style="white-space: nowrap;color:  #ff0032" >prête</h3>
+                <h3 *ngIf="expedition.expeditionStatus=='PICKED_UP'" style="white-space: nowrap;color:  #ff0032" > livrée</h3>
+                <h3 *ngIf="expedition.expeditionStatus=='DRAFT'" style="white-space: nowrap;color:  #ff0032" > DRAFT</h3>
+
+            </ion-card-content>
+        </div>
+        <div style="flex: 1">
+            <h5 style="color: #0ec254">{{total}}€ </h5>
+        </div>
+        <div (click)="router.navigate(['sailor/orders/'+nb])" style="flex: 1">
+            <ion-icon   style="position: absolute;top: 40%;width: 15%;font-size: 200%" name="chevron-forward-outline"></ion-icon>
+        </div>
+    </div>
+
+</ion-card>

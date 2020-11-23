@@ -1,0 +1,47 @@
+<ion-card>
+
+
+  <ion-item lines="none">
+  <ion-row>
+
+      <button *ngIf="enableModification" style="position: absolute;right: 0%;top: 2%;background-color: transparent" ion-button   (click)="removeFromCart()"    >
+        <ion-icon style="color: black;font-size: 120%" name="trash-outline"></ion-icon>
+      </button>
+
+
+    <ion-col size="4" text-center>
+      <img  [src]="(product.images && product.images[0])?product.images[0]:noImage"  alt="item.product.name">
+    </ion-col>
+    <ion-col size="5">
+      <h3   class="item-name">{{product.name.split(' ')[0]|uppercase}}</h3>
+
+      <h5  class="item-def">{{product.description}}</h5>
+      <h3  class="item-def">         <app-stars [numberClientReview]="product.numberClientReview" [score]="product.score"></app-stars></h3>
+
+    </ion-col>
+    <ion-col style="margin-top: 8%" size="3" >
+      <ion-row  >
+         <h3  style="color: #0ec254" class="item-name"   text-end><span class="price"> {{product.price}}€</span></h3>
+        <h5 *ngIf="!enableModification"   class="item-name"   text-end><span class="price"> Quantité: {{cartProduct.quantity}}</span></h5>
+      </ion-row>
+      <ion-row *ngIf="enableModification" style="margin-top: 10%" >
+        <ion-select #select (ionChange)="quantityChanged(select.value)" [placeholder]="cartProduct.quantity" interface="popover" [interfaceOptions]="customAlertOptions"
+                    class="select">
+          <ion-select-option *ngFor="let q of arrayOne(product.stock); let i = index;"   text-center> {{i+1}}</ion-select-option>
+        </ion-select>
+      </ion-row>
+
+    </ion-col>
+    <div *ngIf="!is_sailor">
+      <div *ngIf="product.sailor" style="display: flex">
+        <ion-text style="flex: 1;margin-top: 2%">Vendeur: {{product.sailor.name}}</ion-text>
+        <ion-button  (click)="router.navigate(['/client/boutique_sailor/'+product.sailor.id])" class="ion-text-center" style="color: white;background-color: #4c79ff;flex: 1" type="button"   fill="clear">
+          Boutique
+        </ion-button>
+      </div>
+    </div>
+
+
+  </ion-row>
+</ion-item>
+</ion-card>

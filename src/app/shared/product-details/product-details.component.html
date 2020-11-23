@@ -1,0 +1,150 @@
+
+<ion-content *ngIf="loading">
+<div>
+    <ion-row class="vertical-center" padding-0>
+        <ion-col padding-0 class="padding-0">
+            <ion-slides *ngIf="product.images[0]" pager="true" [options]="slideOpts">
+                <ion-slide >
+                    <img   style="width: 100%"  class="image" [src]="product.images[0]">
+                    <div class="product-image-overlay"></div>
+                </ion-slide>
+                <ion-slide *ngIf="product.images[1]" >
+                    <img  style="width: 100%"  class="image" [src]="product.images[1]">
+                    <div class="product-image-overlay"></div>
+                </ion-slide>
+            </ion-slides>
+            <ion-slides *ngIf="!product.images[0]" pager="true" [options]="slideOpts">
+                <ion-slide >
+                    <img style="width: 100%;height: 70%"  class="image" [src]="noImage">
+                    <div class="product-image-overlay"></div>
+                </ion-slide>
+            </ion-slides>
+            <ion-badge *ngIf="!product.images[1]"  class="badge">
+                <ion-icon name="images"></ion-icon>1
+            </ion-badge>
+            <ion-badge *ngIf="product.images[1]"  class="badge">
+                <ion-icon name="images"></ion-icon>2
+            </ion-badge>
+
+            <ion-fab style="position: absolute;bottom: 2%;right: 2%" >
+                <ion-fab-button (click)="rate()" color="danger">
+                    <ion-icon name="star-half-outline"></ion-icon>
+                </ion-fab-button>
+            </ion-fab>
+        </ion-col>
+    </ion-row>
+    <div style="margin-bottom: 10%" class="ion-text-center"  lines="none" >
+        <h1 class="ion-text-center"><strong>{{product.name|titlecase}}</strong></h1>
+
+        <ion-text>{{product.stock>0? "Produit disponible" : "Non disponible"}}</ion-text>
+        <ion-text *ngIf="product.stock>0">({{product.stock}} articles)</ion-text>
+
+
+    </div>
+    <div style="display: flex;margin-left: 5%;margin-right: 5%">
+        <ion-text style="flex: 15;font-size: 150%">Description</ion-text>
+        <ion-icon *ngIf="!sel_description" (click)="sel_description=true" style="flex: 1;font-size: 150%" name="arrow-forward-outline"></ion-icon>
+        <ion-icon *ngIf="sel_description" (click)="sel_description=false" style="flex: 1;font-size: 150%" name="arrow-down-outline"></ion-icon>
+    </div>
+    <ion-text style="margin-right: 5%;margin-left: 5%" *ngIf="sel_description">
+        {{product.description}}
+    </ion-text>
+    <div *ngIf="product.sailor" style="display: flex;margin-left: 5%;margin-right: 5%;margin-top: 5%">
+        <ion-text style="flex: 13;font-size: 150%">Vendeur</ion-text>
+        <ion-icon *ngIf="!sel_vendeur" (click)="sel_vendeur=true" style="flex: 1;font-size: 150%" name="arrow-forward-outline"></ion-icon>
+        <ion-icon *ngIf="sel_vendeur" (click)="sel_vendeur=false" style="flex: 1;font-size: 150%" name="arrow-down-outline"></ion-icon>
+    </div>
+    <div *ngIf="sel_vendeur&&product.sailor">
+        <ion-item>
+            <ion-label position="floating">nom</ion-label>
+            <br>
+            <h4>{{product.sailor.name}}</h4>
+        </ion-item>
+        <ion-item *ngIf="product.sailor.description">
+            <ion-label position="floating">description</ion-label>
+            <br>
+            <h4>{{product.sailor.description}}</h4>
+        </ion-item>
+        <div style="display: flex;margin-left: 5%;margin-right: 5%">
+            <button style="background-color: transparent;flex: 1" (click)="router.navigate(['/client/boutique_sailor/'+product.sailor.id])" >
+<span class="material-icons">
+store
+</span>            </button>
+            <button style="flex: 1;background-color: transparent" (click)="horaire()"        ion-button >
+                <ion-icon    class="ion-margin-vertical" style="font-size: 150%" name="calendar-outline"></ion-icon>
+            </button>
+
+        </div>
+
+    </div>
+
+    <div style="display: flex;margin-left: 5%;margin-right: 5%;margin-top: 5%">
+        <ion-text style="flex: 5;font-size: 150%">Avis({{product.numberClientReview}})</ion-text>
+        <ion-text style="flex: 3;font-size: 150%">{{product.score.toFixed(1)}}</ion-text>
+        <app-stars style="flex: 5;font-size: 150%" [has_numberClientReview]="false" [numberClientReview]="product.numberClientReview" [score]="product.score"></app-stars>
+        <div  *ngIf="userService.userConnected.id">
+            <ion-icon *ngIf="!bool"  (click)="bool=true" style="flex: 1;font-size: 150%" name="arrow-forward-outline"></ion-icon>
+            <ion-icon *ngIf="bool"  (click)="bool=false" style="flex: 1;font-size: 150%" name="arrow-down-outline"></ion-icon>
+        </div>
+
+    </div>
+    <div *ngIf="bool">
+        <hr>
+        <ion-item style="display: flex" *ngFor="let review of ClientReview">
+            <ion-row style="flex: 4" >
+                <ion-col  >
+                    <ion-row style="display: flex" >
+                        <ion-text style="flex: 1">{{review.client.firstName}}</ion-text>
+                        <app-stars style="flex: 2" [has_numberClientReview]="false" [score]="review.score" ></app-stars>
+
+                    </ion-row>
+
+                    <div >
+                        <ion-row class="full block">
+                            <h6 float-left text-start no-margin class="cmnt">{{review.comment}}</h6>
+                        </ion-row>
+
+                    </div>
+                </ion-col>
+
+            </ion-row>
+            <div style="flex: 1" *ngIf="review.client">
+                <ion-button (click)="edit_review(review)" *ngIf="review.client.id == userService.userConnected.id" class="ion-text-center" style="color: white;background-color: #4c79ff;border-radius: 10px;" type="button"   fill="clear">
+                    modifier
+                </ion-button>
+            </div>
+
+        </ion-item>
+
+    </div>
+
+
+
+
+
+</div>
+
+
+
+    <div style="height: 100px"></div>
+
+</ion-content>
+<ion-footer *ngIf="loading" style="position: absolute;bottom: 0;" class="bottom" align-items-center >
+    <ion-row align-items-center>
+        <ion-col  padding>
+                <h3 class="ion-margin-vertical"    style="color: white" >Price: {{product.price}}€</h3>
+
+        </ion-col>
+        <label style="color: white" class="ion-margin-vertical">Quantite:</label>
+        <ion-select #select style="background-color: transparent;color:white;width: 20%" (ionChange)="selectedQuantity=select.value" [placeholder]="1" interface="popover" [interfaceOptions]="customAlertOptions"
+                    class="select">
+            <ion-select-option *ngFor="let q of arrayOne(product.stock); let i = index;"   text-center> {{i+1}}</ion-select-option>
+        </ion-select>
+            <ion-buttons >
+                <ion-button [disabled]="product.stock<=0" (click)="addToCart()"  >
+                    <ion-icon  name="cart" slot="icon-only" no-margin class=" white top-btn"></ion-icon>
+                </ion-button>
+                </ion-buttons>
+
+    </ion-row>
+</ion-footer>

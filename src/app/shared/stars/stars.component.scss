@@ -1,0 +1,44 @@
+%flex-display {
+  display: flex;
+}
+.star-rating {
+  @extend %flex-display;
+  align-items: center;
+  justify-content: center;
+}
+.back-stars {
+  @extend %flex-display;
+  color: #000000;
+  position: relative;
+  text-shadow: 4px 4px 10px #000000;
+}
+.front-stars {
+  @extend %flex-display;
+  color: #FFD700;
+  overflow: hidden;
+  position: absolute;
+  text-shadow: 2px 2px 5px #d29b09;
+  top: 0;
+  transition: all .5s
+}
+
+input {
+  background: transparent;
+  border: solid 2px #bb5252;
+  color: #fff;
+  font-size: 1.5em;
+  height: 50px;
+  width: 60px;
+  text-align: center;
+  margin-top: 50px;
+  margin-right: 10px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.percent {
+  color: #bb5252;
+  font-size: 1.5em;
+}

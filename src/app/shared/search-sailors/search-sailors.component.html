@@ -1,0 +1,24 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon  style="font-size: 200%;color: white" name="arrow-back-outline" class="white top-btn" (click)="close()">Close</ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button  style="background-color: rgba(255,66,142,0);margin-top: 10px;border-radius: 10px"  type="submit" fill="clear">
+        enregistrer
+      </ion-button>
+    </ion-buttons>
+
+
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div  >
+    <ion-item   style="margin-left: 2%;margin-right: 2%">
+      <ion-label position="floating">Vendeur</ion-label>
+      <ion-input name="vendeur" ngModel required type="text" #vendeur=ngModel ></ion-input>
+    </ion-item>
+  </div>
+</ion-content>
+

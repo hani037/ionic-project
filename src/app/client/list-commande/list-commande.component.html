@@ -1,0 +1,17 @@
+<ion-content *ngIf="loading"  fullscreen>
+  <ion-row style="background-color: #eeeeee;height: 8%" margin-horizontal margin-bottom>
+    <ion-text  style="margin-top: 15px;margin-left: 15px">Commandes</ion-text>
+  </ion-row>
+
+
+  <ion-row  >
+    <ion-col *ngFor="let or of order;let i = index" size="12" >
+      <app-commande [status]="or.orderStatus" [expedition]="or.expeditions" [nb]="i"   style="display: block"   ></app-commande>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="order.length==0">
+    <h2 class="ion-text-center" style="position: absolute;top: 40%;color: red;left: 10%">IL N'Y A PAS DE COMMANDES</h2>
+  </ion-row>
+
+
+</ion-content>

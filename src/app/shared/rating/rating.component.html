@@ -1,0 +1,61 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon style="font-size: 200%" name="arrow-back-outline" class="white top-btn" (click)="dismissModal()">Close</ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="review" (click)="edit_review(rate,comment)" style="color: white;background-color: rgba(255,66,142,0);margin-top: 10px;border-radius: 10px"  fill="clear">
+        enregistrer
+      </ion-button>
+      <ion-button *ngIf="!review" (click)="submit(rate,comment)" style="color: white;background-color: rgba(255,66,142,0);margin-top: 10px;border-radius: 10px" fill="clear">
+        enregistrer
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content  class="ion-text-center " >
+  <div *ngIf="!review" style="margin-top: 20%">
+    <h1 *ngIf="product">Product:{{product.name}} </h1>
+    <h1 *ngIf="sailor">sailor</h1>
+    <ionic5-star-rating  #rating
+                         activeIcon = "star-outline"
+                         defaultIcon = "star-outline"
+                         activeColor = "yellow"
+                         defaultColor = "black"
+                         readonly="false"
+                         rating="3"
+                         fontSize = "32px"
+                         (ratingChanged)="rate=rating.rating"
+    >
+    </ionic5-star-rating>
+    <ion-item>
+      <ion-label>Review</ion-label>
+      <ion-textarea (ionChange)="comment = textarea.value" #textarea style="margin-right: 2%;margin-left: 2%" rows="3"  ></ion-textarea>
+    </ion-item>
+
+  </div>
+  <div *ngIf="review" style="margin-top: 20%">
+    <h1 *ngIf="product">Product:{{product.name}} </h1>
+    <h1 *ngIf="sailor">sailor</h1>
+    <ionic5-star-rating  #rating
+                         activeIcon = "star-outline"
+                         defaultIcon = "star-outline"
+                         activeColor = "yellow"
+                         defaultColor = "black"
+
+
+                         readonly="false"
+                         [rating]="review.score"
+                         fontSize = "32px"
+                         (ratingChanged)="rate=rating.rating"
+
+    >
+    </ionic5-star-rating>
+    <ion-item>
+      <ion-label>Review</ion-label>
+      <ion-textarea (ionChange)="comment = textarea.value" #textarea [value]="review.comment" style="margin-right: 2%;margin-left: 2%" rows="3"  ></ion-textarea>
+    </ion-item>
+
+  </div>
+
+</ion-content>

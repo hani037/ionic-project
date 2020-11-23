@@ -1,0 +1,45 @@
+<!--
+<ion-card   (click)="router.navigate(['/client/product', product.id])" >
+
+    <img  [src]="(product.images && product.images[0])?product.images[0]:noImage">
+  <div >
+    <ion-card-header>
+      <ion-card-subtitle>{{product.name}}</ion-card-subtitle>
+      <ion-card-title>{{product.stock>0? "Produit disponible" : "Non disponible"}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content >
+
+        <h3  >{{product.score}}</h3>
+        <ion-icon style="color: black" name="star-outline"></ion-icon>
+        <ion-icon style="color: black" name="star-outline"></ion-icon>
+        <ion-icon style="color: black" name="star-outline"></ion-icon>
+        <ion-icon name="star-outline"></ion-icon>
+        <ion-icon name="star-outline"></ion-icon>
+        <h3 style="color: #0ec254">{{product.price}}€</h3>
+
+    </ion-card-content>
+  </div>
+
+</ion-card>
+-->
+<ion-card style="display: flex"  >
+    <div style="flex: 1;width: 100%;height: 100%">
+        <img   [src]="(product.images && product.images[0])?product.images[0]:noImage" >
+
+    </div>
+    <div style="flex: 1" >
+        <ion-card-header>
+            <h2 style="color: black">{{product.name|titlecase}}</h2>
+            <h4 style="color: #4f4f4f">{{product.description}}</h4>
+            <ion-text>{{product.stock>0? "Produit disponible" : "Non disponible"}}</ion-text>
+        </ion-card-header>
+        <ion-card-content >
+
+
+            <app-stars [numberClientReview]="product.numberClientReview" style="width: 100%" [score]="product.score"></app-stars>
+            <br>
+            <h1  style="color: #000000;margin-top: 20px">{{product.price}}€</h1>
+
+        </ion-card-content>
+    </div>
+</ion-card>

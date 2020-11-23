@@ -1,0 +1,89 @@
+image: openjdk:8-jdk
+
+variables:
+
+  ANDROID_COMPILE_SDK: "29"
+  ANDROID_BUILD_TOOLS: "29.0.3"
+  # It's what version of the command line tools we're going to download from the official site.
+  ANDROID_SDK_TOOLS: "6514223"
+
+# Packages installation before running script
+
+stages:
+  - build
+  - deploy
+
+before_script:
+  - apt-get --quiet update --yes
+  - apt-get --quiet install nodejs --yes
+  - apt-get --quiet install npm --yes
+  - apt-get --quiet install --yes wget tar unzip lib32stdc++6 lib32z1
+
+  - npm install --quiet --no-optional
+  - npm install -g native-run
+  - npm install -g cordova
+  - npm install -g cordova-res --unsafe-perm
+  - npm install -g ionic
+  
+  - apt-get install gradle --yes
+
+  # Setup path as ANDROID_SDK_ROOT for moving/exporting the downloaded sdk into it
+  - export ANDROID_SDK_ROOT="${PWD}/android-home"
+  - install -d $ANDROID_SDK_ROOT
+  - wget --output-document=$ANDROID_SDK_ROOT/cmdline-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS}_latest.zip
+  
+  # move to the archive at ANDROID_SDK_ROOT
+  - pushd $ANDROID_SDK_ROOT
+
+  # move to the archive at ANDROID_SDK_ROOT
+  - yes | unzip -d cmdline-tools cmdline-tools.zip || true
+  - export PATH=$PATH:${ANDROID_SDK_ROOT}/cmdline-tools/tools/bin/
+  - sdkmanager --version
+
+  # use yes to accept all licenses
+  - yes | sdkmanager --sdk_root=${ANDROID_SDK_ROOT} --licenses || true
+  - sdkmanager --sdk_root=${ANDROID_SDK_ROOT} "platforms;android-${ANDROID_COMPILE_SDK}"
+  - sdkmanager --sdk_root=${ANDROID_SDK_ROOT} "platform-tools"
+  - sdkmanager --sdk_root=${ANDROID_SDK_ROOT} "build-tools;${ANDROID_BUILD_TOOLS}"
+
+
+cache:
+  untracked: true
+  key: "$CI_PROJECT_ID"
+  paths:
+    - node_modules/
+
+build_android:
+  stage: build
+  script:
+    - ionic cordova platform rm android
+    - ionic cordova platform add android
+    - ionic cordova build android --debug 
+  artifacts:
+    paths:
+      - platforms/android/app/build/outputs/apk/debug/app-debug.apk
+
+build_IOS:
+  stage: build
+  script:
+    - ionic cordova platform rm ios
+    - ionic cordova platform add ios
+    # This instruction is used to build the IOS application but you must have a MAC runtime environment
+    # -ionic cordova build ios --debug
+    - ls platforms
+   
+
+deploy_playstore:
+  stage: deploy
+  only:
+    - master
+  script:
+    - ionic cordova platform rm android
+    - ionic cordova platform add android
+    - ionic cordova build android --release -- --keystore=my-release-key.keystore --storePassword=$KEYSTORE_PASSWORD --alias=APP-ALIAS --password=$KEY_PASSWORD
+    - ls ${ANDROID_SDK_ROOT}/build-tools/${ANDROID_BUILD_TOOLS}
+    - ${ANDROID_SDK_ROOT}/build-tools/${ANDROID_BUILD_TOOLS}/zipalign -f 4 /builds/i-leadconsulting/marketplace-mobile/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk /builds/i-leadconsulting/marketplace-mobile/platforms/android/app/build/outputs/apk/release/Marketplace-App.apk    
+
+  artifacts:
+    paths:
+      - /builds/i-leadconsulting/marketplace-mobile/platforms/android/app/build/outputs/apk/release/Marketplace-App.apk

@@ -1,0 +1,40 @@
+<ion-content *ngIf="loading"  >
+  <ion-row style="background-color: #eeeeee;height: 8%" margin-horizontal margin-bottom>
+    <ion-text style="margin-top: 15px;margin-left: 15px">expédition</ion-text>
+  </ion-row>
+  <ion-grid *ngIf="order?.expeditions?.length >0 ">
+    <div *ngFor="let expedition of  order?.expeditions">
+      <ion-text>Récuperer à: {{expedition.expeditionMode}}</ion-text>
+      <ion-row *ngFor="let expeditionProduct of  expedition?.expeditionProducts">
+
+        <app-cart-product   [enableModification]="false"   [cartProduct]="expeditionProduct"></app-cart-product>
+
+
+
+      </ion-row>
+    </div>
+
+
+  </ion-grid>
+  <ion-row *ngIf="order?.expeditions?.length == 0">
+    <h1 style="position: absolute;top: 40%;color: red;left: 10%">IL N'Y A PAS DE PRODUITS</h1>
+  </ion-row>
+  <div style="height: 100px"></div>
+
+</ion-content>
+<ion-footer (click)="passerPayment()"  *ngIf="order?.expeditions?.length >0&&loading"   style="position: absolute;bottom: 0;" class="bottom" align-items-center >
+  <ion-row align-items-center>
+    <ion-col padding>
+      <ion-text >
+        <h6 no-margin style="color: white" ><strong>Payer la Commande</strong></h6>
+      </ion-text>
+
+    </ion-col>
+
+    <ion-buttons >
+      <ion-button  >
+        <h6 no-margin style="color: white" >total:{{total.toFixed(0)}}€</h6>
+      </ion-button>
+    </ion-buttons>
+  </ion-row>
+</ion-footer>

@@ -1,0 +1,68 @@
+<ion-content *ngIf="loading" fullscreen>
+    <div slot="fixed" style="width: 100% ">
+        <ion-row style="background-color: #eeeeee;height: 8%;display: flex" margin-horizontal margin-bottom>
+            <ion-text *ngIf="!id" style="margin-top: 15px;margin-left: 15px;flex: 5">
+                Produits
+
+            </ion-text>
+            <button style="flex: 1;background-color: transparent"  *ngIf="!id"   (click)="search()"     ion-button >
+                <ion-icon    class="ion-margin-vertical" style="font-size: 150%" name="search-outline"></ion-icon>
+            </button>
+            <ion-text *ngIf="id"  style="margin-left:10px;margin-top: 15px;flex: 5;font-size: 120%;">{{sailor.name}} </ion-text>
+
+            <button *ngIf="id&&sailor_has_horaire" style="flex: 5;background-color: transparent"      ion-button >
+                <ion-icon *ngIf="sailor_is_open" style="color: #0ec254;font-size: 150%"  name="lock-open-outline"></ion-icon>
+                <ion-text *ngIf="sailor_is_open">ouvert actuellement</ion-text>
+                <ion-icon *ngIf="!sailor_is_open&&!next_time_open" style="color: #8b030f;font-size: 150%" name="lock-closed-outline"></ion-icon>
+                <ion-text *ngIf="!sailor_is_open&&!next_time_open">fermer</ion-text>
+
+                <ion-icon *ngIf="next_time_open" style="color: #8b030f;font-size: 150%" name="lock-closed-outline"></ion-icon>
+                <ion-text *ngIf="next_time_open">ouvre du {{next_time_open.start}} au {{next_time_open.end}}</ion-text>
+            </button>
+            <button *ngIf="id&&!sailor_has_horaire" style="flex: 5;background-color: transparent"      ion-button >
+                <ion-icon  style="color: #8b030f;font-size: 150%" name="lock-closed-outline"></ion-icon>
+                <ion-text >fermer</ion-text>
+
+            </button>
+            <button *ngIf="id" style="flex: 1;background-color: transparent"    (click)="horaire()"     ion-button >
+                <ion-icon    class="ion-margin-vertical" style="font-size: 150%" name="information-circle-outline"></ion-icon>
+            </button>
+
+            <!--
+            <app-stars *ngIf="id" style="margin-top: 15px;" [score]="5"> </app-stars>
+
+            <ion-button *ngIf="id" (click)="rate()"  style="color: white;background-color: #ff0f7d;border-radius: 10px;" type="button" fill="clear">
+                rate
+            </ion-button>
+            -->
+        </ion-row>
+
+    </div>
+    <div style="margin-top: 15%">
+        <div *ngIf="is_search"  style="margin-top: 10%" >
+            <h1 style="margin-left: 25%" >Search result
+                <ion-icon style="color: red" (click)="cancel_search()" name="close-circle-outline"></ion-icon>
+
+            </h1>
+
+
+        </div>
+        <ion-row *ngIf="products.length>0" >
+            <ion-col size="12"    *ngFor="let product of products">
+                <app-product (click)="router.navigate(['/client/product', product.id])" style="display: block"   [product]="product"></app-product>
+            </ion-col>
+        </ion-row>
+        <ion-infinite-scroll *ngIf="!id"  threshold="150px" (ionInfinite)="add_products($event)" >
+            <ion-infinite-scroll-content
+                    loadingSpinner="bubbles"
+                    loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+        <ion-row *ngIf="products.length==0">
+            <h2 class="ion-text-center" style="position: absolute;top: 40%;color: red;left: 10%">IL N'Y A PAS DE PRODUITS</h2>
+        </ion-row>
+
+    </div>
+
+</ion-content>
+

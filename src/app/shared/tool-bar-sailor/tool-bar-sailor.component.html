@@ -1,0 +1,14 @@
+<ion-header  [translucent]="true">
+  <ion-toolbar >
+
+    <ion-title (click)="router.navigateByUrl('/sailor')"   type="text"  padding-start  class="search-bar">Vendeur Marketplace</ion-title>
+
+    <ion-buttons  slot="end">
+      <ion-button  id="notification-button" (click)="router.navigateByUrl('/sailor/orders')" >
+        <ion-icon   name="wallet-outline" slot="icon-only" no-margin class="white top-btn"></ion-icon>
+        <ion-badge id="notifications-badge" color="danger">{{number_expedition}}</ion-badge>
+      </ion-button>
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

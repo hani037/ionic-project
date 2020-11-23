@@ -1,0 +1,30 @@
+<ion-content *ngIf="loading">
+  <ion-row  style="background-color: #eeeeee;height: 8%" margin-horizontal margin-bottom>
+    <ion-text style="margin-top: 15px;margin-left: 15px"><strong class="text">Horaire de cette semaine</strong></ion-text>
+  </ion-row>
+<ion-list>
+
+  <app-days [name]="'monday'" [period]="_horaire.monday"   ></app-days>
+  <app-days [name]="'tuesday'" [period]="_horaire.tuesday"   ></app-days>
+  <app-days [name]="'wednesday'" [period]="_horaire.wednesday"   ></app-days>
+  <app-days [name]="'thursday'" [period]="_horaire.thursday"   ></app-days>
+  <app-days [name]="'friday'" [period]="_horaire.friday"   ></app-days>
+  <app-days [name]="'saturday'" [period]="_horaire.saturday"  ></app-days>
+  <app-days [name]="'sunday'" [period]="_horaire.sunday"   ></app-days>
+
+  </ion-list>
+  <div style="height: 20%"></div>
+</ion-content>
+<ion-footer (click)="modifier()"  style="position: absolute;bottom: 0;" class="bottom" align-items-center >
+  <ion-row align-items-center>
+    <ion-col padding>
+      <ion-text >
+        <h6 no-margin  class="ion-text-center" style="color: white" >modifier </h6>
+      </ion-text>
+
+    </ion-col>
+
+
+
+  </ion-row>
+</ion-footer>

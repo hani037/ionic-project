@@ -1,0 +1,47 @@
+<ion-card *ngIf="loading"   >
+  <div style="display: flex">
+
+    <div style="flex: 5"  >
+      <ion-card-header>
+        <ion-card-title>Commande {{nb+1}} </ion-card-title>
+        <h5 *ngIf="status=='PAYED'" style="position: absolute;top: 0;right: 0;color: #0ec254">Payée</h5>
+        <h5 *ngIf="status=='DRAFT'" style="position: absolute;top: 0;right: 0;color: red">DRAFT</h5>
+      </ion-card-header>
+      <ion-card-content >
+
+
+        <div *ngFor="let exp of expedition;let i= index">
+          <ion-text   >Expédition {{i+1}}: {{exp.expeditionMode}}
+            ({{exp.expeditionProducts.length}} produits)</ion-text>
+          <br>
+        </div>
+
+        <ion-text  style="color: #0ec254"> price: {{total.toFixed(0)}}€</ion-text>
+
+      </ion-card-content>
+    </div>
+
+    <div style="flex: 1">
+      <ion-fab  vertical="bottom" slot="fixed">
+        <ion-fab-button  style="height: 30px;width: 30px">
+          <ion-icon md="caret-up" ios="chevron-up-circle-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list style="margin-bottom: 30px;margin-left: -15px"  side="top">
+          <ion-fab-button style="height: 25px;width: 25px" color="light">
+            <ion-icon name="star-half-outline"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button style="height: 25px;width: 25px" color="light">
+            <ion-icon name="newspaper-outline"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button style="height: 25px;width: 25px" color="light">
+            <ion-icon name="swap-horizontal-outline"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+    </div>
+    <div (click)="navigate()" style="flex: 1;background-color: #d8d8d8">
+      <ion-icon   style="position: absolute;top: 40%;width: 15%;font-size: 200%" name="chevron-forward-outline"></ion-icon>
+    </div>
+  </div>
+
+</ion-card>

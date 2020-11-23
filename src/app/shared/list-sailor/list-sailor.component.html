@@ -1,0 +1,41 @@
+<ion-content *ngIf="loading" fullscreen>
+  <ion-row slot="fixed"  style="background-color: #eeeeee;height: 8%;display: flex;width: 100%" margin-horizontal margin-bottom>
+    <ion-text  style="margin-top: 15px;margin-left: 15px;flex: 5">
+      Vendeurs
+
+    </ion-text>
+    <button style="flex: 1;background-color: transparent"     (click)="search()"     ion-button >
+      <ion-icon    class="ion-margin-vertical" style="font-size: 150%" name="search-outline"></ion-icon>
+    </button>
+  </ion-row>
+  <!--
+  <div *ngIf="is_search"  style="margin-top: 10%" >
+    <h1 style="margin-left: 25%" >Search result
+      <ion-icon style="color: red" (click)="cancel_search()" name="close-circle-outline"></ion-icon>
+    </h1>
+  </div>
+  -->
+  <div style="margin-top: 15%">
+  <div *ngIf="is_search"  style="margin-top: 10%" >
+    <h1 style="margin-left: 25%" >Search result
+      <ion-icon style="color: red" (click)="cancel_search()" name="close-circle-outline"></ion-icon>
+
+    </h1>
+  </div>
+  <ion-row *ngIf="sailors.length>0" >
+    <ion-col size="12"    *ngFor="let sailor of sailors">
+      <app-sailor (click)="router.navigate(['/client/boutique_sailor', sailor.id])" style="display: block"   [sailor]="sailor"></app-sailor>
+    </ion-col>
+  </ion-row>
+
+  <ion-infinite-scroll   threshold="150px" (ionInfinite)="add_sailors($event)" >
+    <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ion-row *ngIf="sailors.length==0">
+    <h2 class="ion-text-center" style="position: absolute;top: 40%;color: red;left: 10%">IL N'Y A PAS DE vendeurs</h2>
+  </ion-row>
+  </div>
+</ion-content>

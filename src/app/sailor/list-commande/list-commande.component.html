@@ -1,0 +1,28 @@
+<ion-content *ngIf="loading"  fullscreen>
+  <ion-row style="background-color: #eeeeee;height: 8%" margin-horizontal margin-bottom>
+    <ion-text  style="margin-top: 15px;margin-left: 15px;flex: 5"><strong class="text">commandes</strong></ion-text>
+    <button style="flex: 1;background-color: transparent"     (click)="search()"     ion-button >
+      <ion-icon    class="ion-margin-vertical" style="font-size: 150%" name="search-outline"></ion-icon>
+    </button>
+  </ion-row>
+
+  <div *ngIf="is_search"  style="margin-top: 10%" >
+    <h1 style="margin-left: 25%" >Search result
+      <ion-icon style="color: red" (click)="cancel_search()" name="close-circle-outline"></ion-icon>
+
+    </h1>
+
+
+  </div>
+  <ion-row *ngFor="let  expedition of  expeditions|filterCommande:search_:select_;let i = index" >
+    <ion-col    size="12" >
+      <app-commande  [expedition]="expedition" [nb]="i"   style="display: block"   ></app-commande>
+    </ion-col>
+
+  </ion-row>
+  <ion-row *ngIf="expeditions.length==0">
+    <h1 style="position: absolute;top: 40%;color: red;left: 10%">IL N'Y A PAS DE COMMANDES</h1>
+  </ion-row>
+
+
+</ion-content>

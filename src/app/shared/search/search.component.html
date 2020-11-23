@@ -1,0 +1,60 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon  style="font-size: 200%;color: white" name="arrow-back-outline" class="white top-btn" (click)="close()">Close</ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end">
+    <ion-button  *ngIf="select.value==1" (click)="search_with_my_position(product.value,distance.value)" style="background-color: rgba(255,66,142,0);margin-top: 10px;border-radius: 10px"  type="submit" fill="clear">
+      chercher
+    </ion-button>
+  </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button [ *ngIf="select.value==2" (click)="search_with_my_adresse(product.value,distance.value)" style="background-color: rgba(255,66,142,0);margin-top: 10px;border-radius: 10px"  type="submit" fill="clear">
+        chercher
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="select.value==3" [disabled]="!lat" (click)="search_with_address(product.value,distance.value)"  style="background-color: rgba(255,66,142,0);margin-top: 10px;border-radius: 10px"  type="submit" fill="clear">
+        chercher
+      </ion-button>
+    </ion-buttons>
+
+
+  </ion-toolbar>
+</ion-header>
+ <ion-content>
+  <div  >
+    <ion-item   style="margin-left: 2%;margin-right: 2%">
+      <ion-label position="floating">recherche...</ion-label>
+      <ion-input name="product" ngModel required type="text" #product=ngModel ></ion-input>
+    </ion-item>
+    <ion-item style="margin-left: 2%;margin-right: 2%">
+      <ion-label>distance</ion-label>
+      <ion-select  name="distance" #distance >
+        <ion-select-option  value="2"   text-center>2 KM</ion-select-option>
+        <ion-select-option  value="10"  text-center>10 KM</ion-select-option>
+        <ion-select-option  value="20"  text-center>20 KM</ion-select-option>
+        <ion-select-option  value="50"  text-center>50 KM</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item style="margin-left: 2%;margin-right: 2%">
+      <ion-label>options</ion-label>
+      <ion-select  #select value="1">
+        <ion-select-option  value="1"   text-center>autour de moi</ion-select-option>
+        <ion-select-option  value="2"   text-center>côté de chez moi</ion-select-option>
+        <ion-select-option  value="3"  text-center>choisir adresse</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
+  </div>
+  <div  *ngIf="select.value==3">
+
+    <ion-searchbar (ionChange)="address()" id="googlePlaces"
+                   placeholder="Rechercher un lieu"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
+
+
+
+  </div>
+
+ </ion-content>

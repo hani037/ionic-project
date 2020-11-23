@@ -1,0 +1,25 @@
+ion-title{
+  color: white;
+}
+ion-icon{
+  color: white;
+}
+ion-menu-button{
+  color: white;
+}
+#notification-button {
+  position: relative;
+  width: 42px;
+  top:1px;
+  right: 1px;
+  overflow: visible!important;
+}
+
+
+#notifications-badge {
+  background-color: #ff0e40;
+  position: absolute;
+  top: -9px;
+  right: -7px;
+  border-radius: 100%;
+}

@@ -1,0 +1,199 @@
+<ion-content>
+  <div *ngIf="loading">
+
+    <ion-row  style="background-color: #eeeeee;height: 8%" margin-horizontal margin-bottom>
+      <ion-text style="margin-top: 15px;margin-bottom: 15px;margin-left: 15px">adresse</ion-text>
+      <div *ngIf="!edit&&address"  style="display: flex;position: absolute;top: 2px;right: 1%">
+        <ion-button (click)="confirmAddress(address.id)"  style="flex:1;color: black;background-color: transparent;border-radius: 10px"    fill="clear">
+          Confirmer
+        </ion-button>
+        <ion-button style="flex:1;color: black;background-color: transparent;border-radius: 10px" (click)="edit = true"    fill="clear">
+          Modifier
+        </ion-button>
+      </div>
+      <div *ngIf="edit"  style="display: flex;position: absolute;top: 2px;right: 1%">
+        <ion-button  (click)="updateAddress()" *ngIf="address"  style="flex:1;color: black;background-color: transparent;border-radius: 10px"    fill="clear">
+          Modifier
+        </ion-button>
+        <ion-button *ngIf="address" style="flex:1;color: black;background-color: transparent;border-radius: 10px" (click)="edit = false"     fill="clear">
+          Annuler
+        </ion-button>
+      </div>
+      <div *ngIf="!address"  style="display: flex;position: absolute;top: 2px;right: 1%">
+        <ion-button  (click)="createAddress()"  style="flex:1;color: black;background-color: transparent;border-radius: 10px"     fill="clear">
+          enregistrer
+        </ion-button>
+      </div>
+    </ion-row>
+<div >
+
+
+  <ion-grid *ngIf="!edit&&address">
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3">
+        <div>
+          <ion-item lines="none">
+            <ion-title position="floating">Nom: <strong>{{address.name}}</strong></ion-title>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-title position="floating"> adresse Ligne 1: <strong>{{address.addressLigne1}}</strong></ion-title>
+
+          </ion-item >
+          <ion-item lines="none">
+            <ion-title position="floating">adresse Ligne2: <strong>{{address.addressLigne2}}</strong></ion-title>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-title position="floating">ville: <strong>{{address.city}}</strong></ion-title>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-title position="floating">pays: <strong>{{address.country}}</strong></ion-title>
+
+          </ion-item>
+          <ion-item lines="none">
+            <ion-title position="floating">ZipCode: <strong>{{address.zipCode}}</strong></ion-title>
+          </ion-item>
+
+
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+  <ion-grid>
+    <form *ngIf="edit" #form1="ngForm" >
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <div>
+            <ion-item>
+              <ion-label position="floating">nom</ion-label>
+              <ion-input  type="text"
+                          [ngModel]="address.name"
+                          name="name"
+                          required
+                          #name="ngModel"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">address Ligne1</ion-label>
+              <ion-input   type="text"
+                           [ngModel]="address.addressLigne1"
+                           name="address1"
+                           required
+                           #address1="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">address Ligne2</ion-label>
+              <ion-input   type="text"
+                           [ngModel]="address.addressLigne2"
+                           name="address2"
+                           required
+                           #address2="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">ville</ion-label>
+              <ion-input  type="text"
+                          [ngModel]="address.city"
+                          name="city"
+                          required
+                          #city="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">pays</ion-label>
+              <ion-input   type="text"
+                           [ngModel]="address.country"
+                           name="country"
+                           required
+                           #country="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">ZipCode</ion-label>
+              <ion-input   type="text"
+                           [ngModel]="address.zipCode"
+                           name="zipcode"
+                           required
+                           #zipcode="ngModel"
+              ></ion-input>
+            </ion-item>
+
+
+          </div>
+        </ion-col>
+      </ion-row>
+    </form>
+    <form *ngIf="!address" #form2="ngForm" >
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <div>
+            <ion-item>
+              <ion-label position="floating">nom</ion-label>
+              <ion-input  type="text"
+                          ngModel
+                          name="name"
+                          required
+                          #name="ngModel"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">address Ligne1</ion-label>
+              <ion-input   type="text"
+                           ngModel
+                           name="address1"
+                           required
+                           #address1="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">address Ligne2</ion-label>
+              <ion-input   type="text"
+                           ngModel
+                           name="address2"
+                           required
+                           #address2="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">ville</ion-label>
+              <ion-input  type="text"
+                          ngModel
+                          name="city"
+                          required
+                          #city="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">pays</ion-label>
+              <ion-input   type="text"
+                           ngModel
+                           name="country"
+                           required
+                           #country="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">ZipCode</ion-label>
+              <ion-input   type="text"
+                           ngModel
+                           name="zipcode"
+                           required
+                           #zipcode="ngModel"
+              ></ion-input>
+            </ion-item>
+
+
+          </div>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+  </div>
+  </div>
+</ion-content>

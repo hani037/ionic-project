@@ -1,0 +1,21 @@
+<ion-card style="display: flex"  >
+  <div style="flex: 1;width: 100%;height: 100%">
+    <img   [src]="(sailor.image )?sailor.image:noImage" >
+
+  </div>
+  <div style="flex: 1" >
+    <ion-card-header>
+      <h2 style="color: black">{{sailor.name|titlecase}}</h2>
+      <h4 style="color: #4f4f4f">{{sailor.description}}</h4>
+    </ion-card-header>
+    <ion-card-content >
+
+
+      <app-stars  style="width: 100%" [score]="sailor.score"></app-stars>
+      <br>
+      <button style="flex: 1;background-color: transparent"    (click)="horaire()"     ion-button >
+        <ion-icon    class="ion-text-center" style="font-size: 200%" name="calendar-outline"></ion-icon>
+      </button>
+    </ion-card-content>
+  </div>
+</ion-card>

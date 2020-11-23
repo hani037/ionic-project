@@ -1,0 +1,85 @@
+<ion-header translucent>
+  <ion-toolbar *ngIf="sailor">
+    <ion-buttons slot="start">
+      <ion-icon  style="font-size: 200%;color: white" name="arrow-back-outline" class="white top-btn" (click)="close()">Close</ion-icon>
+    </ion-buttons>
+
+
+
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="loading" >
+  <div *ngIf="sailor">
+
+  <div>
+
+  </div>
+
+  <div id="content">
+    <div id="profile-info">
+      <img  id="profile-image" [src]="(sailor.image)?sailor.image:noImage">
+      <h2 class="ion-text-center">{{sailor.name}}</h2>
+      <h3 class="ion-text-center">{{sailor.description}}</h3>
+      <div *ngIf="without_horaire">
+          <h3 class="ion-text-center"><strong class="text">Horaire</strong></h3>
+        <ion-list>
+
+          <app-days [client_view]="true" [name]="'monday'" [period]="[]"   ></app-days>
+          <app-days [client_view]="true" [name]="'tuesday'" [period]="[]"   ></app-days>
+          <app-days [client_view]="true" [name]="'wednesday'" [period]="[]"   ></app-days>
+          <app-days [client_view]="true" [name]="'thursday'" [period]="[]"   ></app-days>
+          <app-days [client_view]="true" [name]="'friday'" [period]="[]"   ></app-days>
+          <app-days [client_view]="true" [name]="'saturday'" [period]="[]"  ></app-days>
+          <app-days  [client_view]="true" [name]="'sunday'" [period]="[]"   ></app-days>
+
+        </ion-list>  </div>
+      <div *ngIf="!without_horaire" >
+        <h3 style="background-color: " class="ion-text-center"><strong class="text">Horaire </strong></h3>
+        <ion-list>
+
+          <app-days [client_view]="true" [name]="'monday'" [period]="_horaire.monday"   ></app-days>
+          <app-days [client_view]="true" [name]="'tuesday'" [period]="_horaire.tuesday"   ></app-days>
+          <app-days [client_view]="true" [name]="'wednesday'" [period]="_horaire.wednesday"   ></app-days>
+          <app-days [client_view]="true" [name]="'thursday'" [period]="_horaire.thursday"   ></app-days>
+          <app-days [client_view]="true" [name]="'friday'" [period]="_horaire.friday"   ></app-days>
+          <app-days [client_view]="true" [name]="'saturday'" [period]="_horaire.saturday"  ></app-days>
+          <app-days  [client_view]="true" [name]="'sunday'" [period]="_horaire.sunday"   ></app-days>
+
+        </ion-list>
+        <div style="height: 20%"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div *ngIf="!sailor">
+    <div *ngIf="without_horaire">
+      <h3 class="ion-text-center"><strong class="text">Horaire de sailor</strong></h3>
+      <ion-list>
+
+        <app-days [client_view]="true" [name]="'monday'" [period]="[]"   ></app-days>
+        <app-days [client_view]="true" [name]="'tuesday'" [period]="[]"   ></app-days>
+        <app-days [client_view]="true" [name]="'wednesday'" [period]="[]"   ></app-days>
+        <app-days [client_view]="true" [name]="'thursday'" [period]="[]"   ></app-days>
+        <app-days [client_view]="true" [name]="'friday'" [period]="[]"   ></app-days>
+        <app-days [client_view]="true" [name]="'saturday'" [period]="[]"  ></app-days>
+        <app-days  [client_view]="true" [name]="'sunday'" [period]="[]"   ></app-days>
+
+      </ion-list>  </div>
+    <div *ngIf="!without_horaire" >
+      <h3 class="ion-text-center"><strong class="text">Horaire de sailor</strong></h3>
+      <ion-list>
+
+        <app-days [client_view]="true" [name]="'monday'" [period]="_horaire.monday"   ></app-days>
+        <app-days [client_view]="true" [name]="'tuesday'" [period]="_horaire.tuesday"   ></app-days>
+        <app-days [client_view]="true" [name]="'wednesday'" [period]="_horaire.wednesday"   ></app-days>
+        <app-days [client_view]="true" [name]="'thursday'" [period]="_horaire.thursday"   ></app-days>
+        <app-days [client_view]="true" [name]="'friday'" [period]="_horaire.friday"   ></app-days>
+        <app-days [client_view]="true" [name]="'saturday'" [period]="_horaire.saturday"  ></app-days>
+        <app-days  [client_view]="true" [name]="'sunday'" [period]="_horaire.sunday"   ></app-days>
+
+      </ion-list>
+      <div style="height: 20%"></div>
+    </div>
+  </div>
+</ion-content>
+

@@ -1,0 +1,44 @@
+<!--
+  <ng-container *ngFor='let s of stars1()'>
+    <ion-icon style="color: #FFD700;font-size: 100%" name="star-outline"></ion-icon>
+  </ng-container>
+  <ng-container *ngFor='let s of starsWhite1()'>
+    <ion-icon style="color: black;font-size: 100%" name="star-outline"></ion-icon>
+  </ng-container>
+-->
+  <div class="star-rating" style="width: 50%">
+    <div class="back-stars">
+      <i>
+        <ion-icon aria-hidden="true"  name="star-outline"></ion-icon>
+      </i>
+      <i>
+        <ion-icon aria-hidden="true"  name="star-outline"></ion-icon>
+      </i><i>
+      <ion-icon aria-hidden="true"  name="star-outline"></ion-icon>
+    </i><i>
+      <ion-icon aria-hidden="true"  name="star-outline"></ion-icon>
+    </i><i>
+      <ion-icon aria-hidden="true"  name="star-outline"></ion-icon>
+    </i>
+
+
+      <div class="front-stars"  [style.width]="starPercentageRounded"
+      >
+        <i>
+          <ion-icon aria-hidden="true"  name="star"></ion-icon>
+        </i><i>
+        <ion-icon aria-hidden="true"  name="star"></ion-icon>
+      </i><i>
+        <ion-icon aria-hidden="true"  name="star"></ion-icon>
+      </i><i>
+        <ion-icon aria-hidden="true"  name="star"></ion-icon>
+      </i><i>
+        <ion-icon aria-hidden="true"  name="star"></ion-icon>
+      </i>
+
+      </div>
+    </div>
+    <ion-text  *ngIf="has_numberClientReview" style="color: #535353;margin-left: 5px">{{numberClientReview}} </ion-text>
+
+  </div>
+

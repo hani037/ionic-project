@@ -1,0 +1,42 @@
+<ion-content *ngIf="loading"  >
+    <ion-row style="background-color: #eeeeee;height: 8%" margin-horizontal margin-bottom>
+        <ion-text style="margin-top: 15px;margin-left: 15px"><strong class="text">Order</strong></ion-text>
+    </ion-row>
+    <ion-grid>
+        <h5 class="ion-text-center"  >Client:<strong>{{expeditions.client.firstName}} {{ expeditions.client.lastName}}</strong></h5>
+
+        <div *ngIf="expeditions.expeditionStatus=='WAIT_VALIDATION'" style="display:flex;">
+            <h5 style="flex: 1">Validation</h5>
+            <ion-button (click)="changer_status('UNDER_PREPARATION')" type="button" fill="clear" style="color: white;background-color: #5dff2f;border-radius: 10px;flex: 1" >accepter</ion-button>
+            <ion-button (click)="changer_status(' REJECTED')" type="button" fill="clear" style="color: white;background-color: #ff1f30;border-radius: 10px;flex: 1">refuser</ion-button>
+        </div>
+        <div *ngIf="expeditions.expeditionStatus=='UNDER_PREPARATION'" style="display:flex;">
+            <h5 style="flex: 2">en cours de préparation</h5>
+            <ion-button (click)="changer_status('READY_PICKUP')" type="button" fill="clear" style="color: white;background-color: #ff6990;border-radius: 10px;flex: 1" >prête</ion-button>
+
+        </div>
+        <div *ngIf="expeditions.expeditionStatus=='READY_PICKUP'" style="display:flex;">
+            <h5 style="flex: 2">Commande est prête</h5>
+            <ion-button (click)="changer_status('PICKED_UP')" type="button" fill="clear" style="color: white;background-color: #30ff30;border-radius: 10px;flex: 1">récupérée</ion-button>
+
+        </div>
+        <div *ngIf="expeditions.expeditionStatus=='PICKED_UP'" >
+            <h5 class="ion-text-center">Commande est livrée</h5>
+        </div>
+        <div *ngIf="expeditions.expeditionStatus=='DRAFT'" >
+            <h5 class="ion-text-center" >DRAFT</h5>
+        </div>
+        <ion-row *ngFor="let expedition of  expeditions.expeditionProducts">
+
+            <app-cart-product [is_sailor]="true" [enableModification]="false"   [cartProduct]="expedition"></app-cart-product>
+
+
+
+        </ion-row>
+
+
+    </ion-grid>
+
+    <div style="height: 100px"></div>
+
+</ion-content>

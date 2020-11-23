@@ -1,0 +1,22 @@
+<ion-content *ngIf="loading" fullscreen>
+
+  <ion-row style="background-color: #eeeeee;height: 8%" margin-horizontal margin-bottom>
+    <ion-text style="margin-top: 15px;margin-left: 15px">Produits</ion-text>
+  </ion-row>
+
+
+
+  <ion-row *ngIf="products.length>0" >
+    <ion-col size="12"    *ngFor="let product of products">
+      <app-product (click)="router.navigate(['/sailor/product/', product.id])" style="display: block"   [product]="product"></app-product>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="products.length==0">
+    <h1 style="position: absolute;top: 40%;color: red;left: 10%">IL N'Y A PAS DE PRODUITS</h1>
+  </ion-row>
+
+</ion-content>
+
+<ion-buttons (click)="create()" id="cercle" style="position: absolute;bottom: 10px;display: block;right: 10px">
+  <ion-icon style="width: 100%;height: 100%;color: white" name="add-outline"></ion-icon>  </ion-buttons>

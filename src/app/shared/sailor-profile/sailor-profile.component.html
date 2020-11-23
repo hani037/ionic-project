@@ -1,0 +1,94 @@
+
+<ion-content *ngIf="loading" padding>
+  <ion-row style="background-color: #eeeeee;height: 8%" margin-horizontal margin-bottom>
+    <ion-text style="margin-top: 15px;margin-left: 15px">compte</ion-text>
+    <button *ngIf="is_edit"  type="sumbit" (click)="is_edit=false"   style="background-color: transparent;font-size: 150%;position:absolute; top:12px;right: 15%"      ion-button >
+      <ion-icon name="close"></ion-icon>
+    </button>
+    <button *ngIf="is_edit" [disabled]="f.invalid||!long" type="sumbit" (click)="modifierUser(f)"   style="background-color: transparent;font-size: 150%;position:absolute; top:12px;right: 3%"      ion-button >
+      <ion-icon name="save"></ion-icon>
+    </button>
+    <button *ngIf="!is_edit"  type="sumbit" (click)="is_edit=true"   style="background-color: transparent;font-size: 150%;position:absolute; top:12px;right: 3%"      ion-button >
+      <ion-icon name="pencil-outline"></ion-icon>
+    </button>
+
+  </ion-row>
+
+  <div id="content">
+    <div id="profile-info">
+      <img  id="profile-image" [src]="(sailor.image)?sailor.image:noImage">
+      <form style="margin-bottom: 20%" #f="ngForm" >
+        <ion-grid>
+          <ion-row>
+            <ion-col size-sm="6" offset-sm="3">
+              <div>
+
+
+                <ion-item>
+                  <ion-label position="floating">nom</ion-label>
+                  <ion-input *ngIf="is_edit"
+                          [(ngModel)]="sailor.name"
+                          type="text"
+                          ngModel
+                          name="name"
+                          required
+                          #name="ngModel"
+                  ></ion-input>
+                  <br *ngIf="!is_edit">
+                  <ion-text  *ngIf="!is_edit">{{sailor.name}}</ion-text>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">description</ion-label>
+                  <ion-input *ngIf="is_edit"
+                          [(ngModel)]="sailor.description"
+                          type="text"
+                          ngModel
+                          name="description"
+                          required
+                          #description="ngModel"
+                  ></ion-input>
+                  <br *ngIf="!is_edit">
+                  <ion-text   *ngIf="!is_edit">{{sailor.description}}</ion-text>
+
+                </ion-item>
+
+                <ion-item>
+                <ion-label position="floating">Adresse</ion-label>
+                  <br *ngIf="!is_edit">
+                  <ion-text  *ngIf="!is_edit&&adresse">{{adresse}}</ion-text>
+                  <ion-text  *ngIf="!is_edit&&!adresse">pas d'adresse</ion-text>
+                  <ion-searchbar style="margin-top: 5%" *ngIf="is_edit" [value]="adresse" (ionChange)="address()" id="googlePlaces"
+                                 placeholder="Search for a place"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
+
+                </ion-item>
+
+
+
+
+
+
+
+              </div>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </form>
+
+
+
+    </div>
+
+  </div>
+
+  <ion-fab style="position: absolute;bottom: 10px" vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button  (click)="addPhotoToGallery()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <!-- <div text-center>
+    <ion-spinner color="primary" *ngIf="isLoading"></ion-spinner>
+  </div> -->
+</ion-content>

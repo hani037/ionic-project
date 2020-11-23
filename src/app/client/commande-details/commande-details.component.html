@@ -1,0 +1,44 @@
+<ion-content *ngIf="loading"   >
+  <ion-row style="background-color: #eeeeee;height: 8%" margin-horizontal margin-bottom>
+    <ion-text style="margin-top: 15px;margin-left: 15px"><strong class="text">Commande</strong>
+    </ion-text>
+
+  </ion-row>
+
+  <ion-grid *ngIf="order?.expeditions?.length >0 ">
+    <div *ngFor="let expedition of  order?.expeditions">
+      <ion-text>Récuperer à:{{expedition.expeditionProducts[0].product.sailor.name}}</ion-text>
+      <div class="ion-text-center " style="color: red" >
+        <ion-text *ngIf="expedition.expeditionStatus=='WAIT_VALIDATION'" >
+          ETAT: attendre la validation
+        </ion-text>
+        <ion-text *ngIf="expedition.expeditionStatus=='UNDER_PREPARATION'" >
+          ETAT: en cours de préparation
+        </ion-text>
+        <ion-text *ngIf="expedition.expeditionStatus=='REJECTED'" >
+          ETAT: rejetée
+        </ion-text>
+        <ion-text *ngIf="expedition.expeditionStatus=='READY_PICKUP'" >
+          ETAT: prête
+        </ion-text>
+        <ion-text *ngIf="expedition.expeditionStatus=='PICKED_UP'" >
+          ETAT: livrée
+        </ion-text>
+        <ion-text *ngIf="expedition.expeditionStatus=='DRAFT'" >
+          ETAT: draft
+        </ion-text>
+      </div>
+      <ion-row *ngFor="let expeditionProduct of  expedition?.expeditionProducts">
+
+        <app-cart-product  [enableModification]="false"   [cartProduct]="expeditionProduct"></app-cart-product>
+
+
+
+      </ion-row>
+    </div>
+
+
+  </ion-grid>
+
+
+</ion-content>

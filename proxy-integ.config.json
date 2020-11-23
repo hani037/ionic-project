@@ -1,0 +1,11 @@
+ {
+  "/api/*": {
+
+    "target": "http://a4f3408a2e8944f538ff1ccfd84e6500-1864466040.eu-west-3.elb.amazonaws.com:8080",
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}
+

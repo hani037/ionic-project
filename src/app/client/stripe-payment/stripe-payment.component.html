@@ -1,0 +1,32 @@
+<ion-content >
+  <ion-row style="background-color: #eeeeee;height: 8%" margin-horizontal margin-bottom>
+    <ion-text  style="margin-top: 15px;margin-left: 15px">Payment</ion-text>
+  </ion-row>
+  <ion-grid>
+    <ion-card style="box-shadow: black ">
+
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3">
+        <div>
+<form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">
+  <ion-item style="margin-bottom: 10px">
+  <ion-label position="floating">Nom</ion-label>
+  <ion-input
+          type="text" formControlName="name" placeholder="nom"
+  ></ion-input>
+  </ion-item>
+  <ngx-stripe-card style="background-color: black"
+          [options]="cardOptions"
+          [elementsOptions]="elementsOptions"
+  ></ngx-stripe-card>
+  <ion-button  style="color: white;background-color: #4c79ff;border-radius: 10px;margin-top: 10px" type="submit"  expand="block" fill="clear">
+    Payer
+  </ion-button>
+
+</form>
+        </div>
+      </ion-col>
+    </ion-row>
+    </ion-card>
+  </ion-grid>
+</ion-content>

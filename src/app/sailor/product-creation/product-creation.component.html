@@ -1,0 +1,93 @@
+<ion-content *ngIf="loading">
+  <ion-row  style="background-color: #eeeeee;height: 8%" margin-horizontal margin-bottom>
+    <ion-text style="margin-top: 15px;margin-left: 15px"><strong class="text">Rajouter un produit</strong></ion-text>
+  </ion-row>
+  <ion-fab style="position: absolute;bottom: 10px" vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button [disabled]="!id" (click)="addPhotoToGallery()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <form #f="ngForm" (ngSubmit)="ajouter_produit(f)">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <div>
+
+            <ion-item>
+              <ion-label position="floating">Nom du produit</ion-label>
+              <ion-input
+                      type="text"
+                      [ngModel]="product.name"
+                      name="name"
+                      required
+                      #name="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">description</ion-label>
+              <ion-textarea
+                      type="text"
+                      [ngModel]="product.description"
+                      name="description"
+                      required
+                      #description="ngModel"
+              ></ion-textarea>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Stock</ion-label>
+              <ion-input
+                      type="number"
+                      [ngModel]="product.stock"
+                      name="Stock"
+                      required
+                      #Stock="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Price</ion-label>
+              <ion-input
+                      type="number"
+                      [ngModel]="product.price"
+                      name="Price"
+                      required
+                      #Price="ngModel"
+              ></ion-input>
+            </ion-item>
+
+          </div>
+          <ion-grid >
+
+            <div *ngIf="id">
+              <ion-row *ngIf="product.images[0]!=''">
+                <ion-title class="ion-text-center">Liste des images </ion-title>
+                <ion-col size="6"
+                         *ngFor="let photo of product.images; index as position">
+                  <ion-img *ngIf="photo!=''" src="{{photo}}" ></ion-img>
+                  <ion-fab  style="position: absolute;top: 0%;right: 0%;font-size: 110%;" *ngIf="photo!=''&&photo!=' '"  >
+                    <ion-fab-button style="height: 30px;width: 30px;" [disabled]="!id" color="danger" (click)="delete_image(position)">
+                      <ion-icon  name="trash-outline"></ion-icon>
+                    </ion-fab-button>
+                  </ion-fab>
+                  <ion-fab style="position: absolute;bottom: 1%;left: 32%" *ngIf="photo!=''&&photo!=' '" >
+                    <ion-fab-button [disabled]="!id" (click)="modifier_image(position)">
+                      <ion-icon name="camera"></ion-icon>
+                    </ion-fab-button>
+                  </ion-fab>
+                </ion-col>
+              </ion-row>
+            </div>
+
+          </ion-grid>
+          <ion-button *ngIf="!id" [disabled]="f.invalid" style="color: white;background-color: #4c79ff;border-radius: 10px" type="submit"  expand="block" fill="clear">
+            ajouter
+          </ion-button>
+          <ion-button *ngIf="id" [disabled]="f.invalid" style="color: white;background-color: #4c79ff;border-radius: 10px" type="submit"  expand="block" fill="clear">
+            modifier
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </form>
+
+</ion-content>

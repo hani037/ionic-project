@@ -1,0 +1,37 @@
+<ion-content *ngIf="loading">
+
+  <ion-row style="background-color: #eeeeee;height: 8%" margin-horizontal margin-bottom>
+    <ion-text style="margin-top: 15px;margin-left: 15px">Articles dans le panier</ion-text>
+  </ion-row>
+  <ion-grid *ngIf="cart.cartProducts.length>0">
+    <ion-row *ngFor="let cartProduct of  cart?.cartProducts">
+
+      <app-cart-product  [enableModification]="true"   [cartProduct]="cartProduct"></app-cart-product>
+
+
+
+    </ion-row>
+
+  </ion-grid>
+  <ion-row *ngIf="cart.cartProducts.length==0">
+    <h1 style="position: absolute;top: 40%;color: red;left: 10%">Votre panier est vide</h1>
+  </ion-row>
+  <div style="height: 100px"></div>
+
+</ion-content>
+<ion-footer (click)="router.navigate(['/client/address_confirmation'])" *ngIf="loading&&cart.cartProducts.length>0"   style="position: absolute;bottom: 0;" class="bottom" align-items-center >
+  <ion-row align-items-center>
+    <ion-col padding>
+      <ion-text >
+        <h3 no-margin style="color: white" >Passer la Commande</h3>
+      </ion-text>
+
+    </ion-col>
+
+    <ion-buttons >
+      <ion-button  >
+        <h3 no-margin style="color: white" >total: {{total.toFixed(0)}}€</h3>
+      </ion-button>
+    </ion-buttons>
+  </ion-row>
+</ion-footer>
